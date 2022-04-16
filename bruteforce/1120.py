@@ -1,10 +1,9 @@
 
 import sys
 
-a, b = sys.stdin.readline().strip().split()
+a, b = sys.stdin.readline().rstrip().split()
 
 ans = []
-
 for i in range(len(b) - len(a) + 1):
     cnt = 0
     for j in range(len(a)):
@@ -12,5 +11,5 @@ for i in range(len(b) - len(a) + 1):
             cnt += 1
     ans.append(cnt)
 
-
-print(min(ans))
+ans.sort()
+print(ans[0])
