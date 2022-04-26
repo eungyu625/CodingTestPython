@@ -1,9 +1,10 @@
 
 l, c = map(int, input().split())
 arr = list(map(str, input().split()))
-check = [0] * c
 arr.sort()
 ans = []
+check = [0] * c
+
 
 def vowel_consonant(res):
     vowel = 0
@@ -27,11 +28,10 @@ def solve(index, res, start):
             check[i] = 1
             res += arr[i]
             solve(index + 1, res, i + 1)
-            res = res[0:int(index)]
+            res = res[0:index]
             check[i] = 0
 
 
 solve(0, "", 0)
-ans.sort()
 for a in range(len(ans)):
     print(ans[a])
