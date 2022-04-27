@@ -1,7 +1,7 @@
+
 import heapq
 
 INF = int(1e9)
-
 v, e = map(int, input().split())
 k = int(input())
 
@@ -22,16 +22,15 @@ def dijkstra():
         if distance[now] < dist:
             continue
         for i in arr[now]:
-            cost = dist + i[1]
+            cost = i[1] + dist
             if cost < distance[i[0]]:
                 distance[i[0]] = cost
                 heapq.heappush(q, (cost, i[0]))
 
 
 dijkstra()
-
-for i in range(1, v + 1):
-    if distance[i] == INF:
+for a in range(1, v + 1):
+    if distance[a] == INF:
         print("INF")
     else:
-        print(distance[i])
+        print(distance[a])
