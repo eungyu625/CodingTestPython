@@ -4,7 +4,6 @@ import heapq
 INF = int(1e9)
 v, e = map(int, input().split())
 k = int(input())
-
 arr = [[] for _ in range(v + 1)]
 distance = [INF] * (v + 1)
 
