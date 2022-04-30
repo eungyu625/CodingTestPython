@@ -21,7 +21,7 @@ while True:
         nx = r + dx[nd]
         ny = c + dy[nd]
         d = nd
-        if 0 <= nx < n and 0 <= ny < m:
+        if 0 <= nx < m and 0 <= ny < n:
             if arr[nx][ny] == 0 and check[nx][ny] == 0:
                 check[nx][ny] = 1
                 ans += 1
@@ -29,11 +29,10 @@ while True:
                 c = ny
                 found = True
                 break
-
     if not found:
-        if arr[r - dx[d]][c - dy[d]] == 1:
+        if arr[r - dx[d]][c - dy[d]] != 0:
             print(ans)
             break
         else:
-            r = r - dx[d]
-            c = c - dy[d]
+            r, c = r - dx[d], c - dy[d]
+
