@@ -1,68 +1,59 @@
-
+import copy
+import sys
+from itertools import combinations
 from collections import deque
 
 dx = [0, 0, -1, 1]
 dy = [-1, 1, 0, 0]
 
-ans = 0
+input = sys.stdin.readline
+
 n, m = map(int, input().split())
 arr = []
-d = [[0] * m for _ in range(n)]
-check = [[0] * m for _ in range(n)]
+safe = []
+virus = []
+ans = 0
 
-for _ in range(n):
-    arr.append(list(map(int, input().split())))
+for i in range(n):
+    data = list(map(int, input().split()))
+    arr.append(data)
+    for j in range(len(data)):
+        if data[j] == 0:
+            safe.append([i, j])
+        if data[j] == 2:
+            virus.append([i, j])
 
 
-def initialize():
-    for i in range(n):
-        for j in range(m):
-            d[i][j] = arr[i][j]
-
-
-def bfs():
+def dfs(current):
+    global virus
+    global ans
+    temp = copy.deepcopy(current)
     queue = deque()
-    for a in range(n):
-        for b in range(m):
-            if d[a][b] == 2:
-                queue.append((a, b))
+    for [x, y] in virus:
+        queue.append((x, y))
 
     while queue:
         x, y = queue.popleft()
         for k in range(4):
             nx = x + dx[k]
             ny = y + dy[k]
-            if 0 <= nx < n and 0 <= ny < m and d[nx][ny] == 0:
-                d[nx][ny] = 2
+            if 0 <= nx < n and 0 <= ny < m and temp[nx][ny] == 0:
+                temp[nx][ny] = 2
                 queue.append((nx, ny))
 
     res = 0
-    for a in range(n):
-        for b in range(m):
-            if d[a][b] == 0:
+    for x in range(n):
+        for y in range(m):
+            if temp[x][y] == 0:
                 res += 1
-    global ans
-    if ans < res:
-        ans = res
+    ans = max(ans, res)
 
 
-def solve(index):
-    if index == 3:
-        initialize()
-        bfs()
-        initialize()
-        return
+for v in list(combinations(safe, 3)):
+    for [i, j] in v:
+        arr[i][j] = 1
+    dfs(arr)
+    for [i, j] in v:
+        arr[i][j] = 0
 
-    for a in range(n):
-        for b in range(m):
-            if arr[a][b] == 0 and check[a][b] == 0:
-                check[a][b] = 1
-                arr[a][b] = 1
-                solve(index + 1)
-                arr[a][b] = 0
-                check[a][b] = 0
-
-
-initialize()
-solve(0)
 print(ans)

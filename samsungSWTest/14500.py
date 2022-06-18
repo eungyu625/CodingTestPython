@@ -1,4 +1,3 @@
-
 n, m = map(int, input().split())
 arr = []
 check = [[0] * m for _ in range(n)]
