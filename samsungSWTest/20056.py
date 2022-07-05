@@ -1,30 +1,30 @@
 N, M, K = map(int, input().split())
 fireballs = []
-for _ in range(K):
+
+for _ in range(M):
     ri, ci, mi, si, di = map(int, input().split())
     fireballs.append([ri - 1, ci - 1, mi, si, di])
 
 MAP = [[[] for _ in range(N)] for _ in range(N)]
-
 dx = [-1, -1, 0, 1, 1, 1, 0, -1]
 dy = [0, 1, 1, 1, 0, -1, -1, -1]
 
 for _ in range(K):
     while fireballs:
         cr, cc, cm, cs, cd = fireballs.pop(0)
-        nr = (cr + cs * dx[cd]) % N
-        nc = (cc + cs * dy[cd]) % N
-        MAP[nr][nc].append([cm, cs, cd])
+        rr = (cr + cs * dx[cd]) % N
+        rc = (cc + cs * dy[cd]) % N
+        MAP[rr][rc].append([cm, cs, cd])
 
     for r in range(N):
         for c in range(N):
             if len(MAP[r][c]) > 1:
                 sum_m, sum_s, cnt_odd, cnt_even, cnt = 0, 0, 0, 0, len(MAP[r][c])
                 while MAP[r][c]:
-                    m, s, d = MAP[r][c].pop(0)
-                    sum_m += m
-                    sum_s += s
-                    if d % 2 == 1:
+                    _m, _s, _d = MAP[r][c].pop(0)
+                    sum_m += _m
+                    sum_s += _s
+                    if _d % 2 == 1:
                         cnt_odd += 1
                     else:
                         cnt_even += 1
