@@ -1,4 +1,3 @@
-
 dx = [-1, -1, -1, 0, 1, 1, 1, 0]
 dy = [-1, 0, 1, 1, 1, 0, -1, -1]
 
@@ -16,6 +15,7 @@ for _ in range(M):
     tree[x - 1][y - 1].append(z)
 
 for _ in range(K):
+
     for i in range(N):
         for j in range(N):
             tree[i][j].sort()
