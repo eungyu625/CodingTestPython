@@ -1,21 +1,16 @@
-dx = [-1, -1, -1, 0, 1, 1, 1, 0]
-dy = [-1, 0, 1, 1, 1, 0, -1, -1]
-
 N, M, K = map(int, input().split())
-arr = []
+arr = [list(map(int, input().split())) for _ in range(N)]
 use = [[5] * N for _ in range(N)]
 tree = [[[] for _ in range(N)] for _ in range(N)]
 dead = [[[] for _ in range(N)] for _ in range(N)]
-
-for _ in range(N):
-    arr.append(list(map(int, input().split())))
+dx = [-1, -1, -1, 0, 1, 1, 1, 0]
+dy = [-1, 0, 1, 1, 1, 0, -1, -1]
 
 for _ in range(M):
     x, y, z = map(int, input().split())
     tree[x - 1][y - 1].append(z)
 
 for _ in range(K):
-
     for i in range(N):
         for j in range(N):
             tree[i][j].sort()
