@@ -5,6 +5,7 @@ tree = [[[] for _ in range(N)] for _ in range(N)]
 dead = [[[] for _ in range(N)] for _ in range(N)]
 dx = [-1, -1, -1, 0, 1, 1, 1, 0]
 dy = [-1, 0, 1, 1, 1, 0, -1, -1]
+ans = 0
 
 for _ in range(M):
     x, y, z = map(int, input().split())
@@ -34,6 +35,7 @@ for _ in range(K):
             for k in range(len(tree[i][j])):
                 if tree[i][j][k] % 5 != 0:
                     continue
+
                 for n in range(8):
                     nx = i + dx[n]
                     ny = j + dy[n]
@@ -44,7 +46,6 @@ for _ in range(K):
         for j in range(N):
             use[i][j] += arr[i][j]
 
-ans = 0
 for i in range(N):
     for j in range(N):
         ans += len(tree[i][j])

@@ -1,40 +1,42 @@
-N, M, K = map(int, input().split())
-fireballs = []
-
-for _ in range(M):
-    ri, ci, mi, si, di = map(int, input().split())
-    fireballs.append([ri - 1, ci - 1, mi, si, di])
-
-MAP = [[[] for _ in range(N)] for _ in range(N)]
 dx = [-1, -1, 0, 1, 1, 1, 0, -1]
 dy = [0, 1, 1, 1, 0, -1, -1, -1]
 
+N, M, K = map(int, input().split())
+fireball = []
+arr = [[[] for _ in range(N)] for _ in range(N)]
+
+for _ in range(M):
+    r, c, m, s, d = map(int, input().split())
+    fireball.append([r - 1, c - 1, m, s, d])
+
 for _ in range(K):
-    while fireballs:
-        cr, cc, cm, cs, cd = fireballs.pop(0)
-        rr = (cr + cs * dx[cd]) % N
-        rc = (cc + cs * dy[cd]) % N
-        MAP[rr][rc].append([cm, cs, cd])
+    while fireball:
+        r, c, m, s, d = fireball.pop(0)
+        rr = (r + s * dx[d]) % N
+        rc = (c + s * dy[d]) % N
+        arr[rr][rc].append([m, s, d])
 
-    for r in range(N):
-        for c in range(N):
-            if len(MAP[r][c]) > 1:
-                sum_m, sum_s, cnt_odd, cnt_even, cnt = 0, 0, 0, 0, len(MAP[r][c])
-                while MAP[r][c]:
-                    _m, _s, _d = MAP[r][c].pop(0)
-                    sum_m += _m
-                    sum_s += _s
-                    if _d % 2 == 1:
-                        cnt_odd += 1
+    for i in range(N):
+        for j in range(N):
+            if len(arr[i][j]) == 1:
+                fireball.append([i, j] + arr[i][j].pop())
+            elif len(arr[i][j]) > 1:
+                sum_m, sum_s, odd, even, cnt = 0, 0, 0, 0, len(arr[i][j])
+                while arr[i][j]:
+                    m, s, d = arr[i][j].pop(0)
+                    sum_m += m
+                    sum_s += s
+                    if d % 2 != 0:
+                        odd += 1
                     else:
-                        cnt_even += 1
-                if cnt_odd == cnt or cnt_even == cnt:
-                    nd = [0, 2, 4, 6]
-                else:
-                    nd = [1, 3, 5, 7]
-                for d in nd:
-                    fireballs.append([r, c, sum_m // 5, sum_s // cnt, d])
-            if len(MAP[r][c]) == 1:
-                fireballs.append([r, c] + MAP[r][c].pop())
+                        even += 1
+                if sum_m // 5:
+                    if odd == cnt or even == cnt:
+                        nd = [0, 2, 4, 6]
+                    else:
+                        nd = [1, 3, 5, 7]
 
-print(sum(f[2] for f in fireballs))
+                    for d in nd:
+                        fireball.append([i, j, sum_m // 5, sum_s // cnt, d])
+
+print(sum(f[2] for f in fireball))
