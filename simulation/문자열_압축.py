@@ -13,10 +13,7 @@ def solution(s):
                 count += 1
             else:
                 compressed += str(count) + prev if count >= 2 else prev
-                prev = s[j:j + step]
                 count = 1
-
         compressed += str(count) + prev if count >= 2 else prev
         answer = min(answer, len(compressed))
-
     return answer
