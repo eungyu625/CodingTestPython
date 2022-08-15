@@ -6,12 +6,12 @@ def rotate_90_degree(key):
     for i in range(n):
         for j in range(m):
             result[j][n - i - 1] = key[i][j]
-
     return result
 
 
 def check(new_lock):
     length = len(new_lock) // 3
+
     for i in range(length, 2 * length):
         for j in range(length, 2 * length):
             if new_lock[i][j] != 1:
@@ -31,16 +31,15 @@ def solution(key, lock):
 
     for rotate in range(4):
         key = rotate_90_degree(key)
-
-        for x in range(n * 2):
-            for y in range(n * 2):
-                for i in range(m):
-                    for j in range(m):
-                        new_lock[x + i][y + j] += key[i][j]
+        for i in range(n * 2):
+            for j in range(n * 2):
+                for x in range(m):
+                    for y in range(m):
+                        new_lock[i + x][j + y] += key[x][y]
                 if check(new_lock):
                     return True
-                for i in range(m):
-                    for j in range(m):
-                        new_lock[x + i][y + j] -= key[i][j]
+                for x in range(m):
+                    for y in range(m):
+                        new_lock[i + x][j + y] -= key[x][y]
 
     return False
