@@ -1,20 +1,17 @@
 import heapq
 
 N = int(input())
-
 heap = []
-for i in range(N):
-    data = int(input())
-    heapq.heappush(heap, data)
 
-result = 0
+for _ in range(N):
+    heapq.heappush(heap, int(input()))
+
+answer = 0
 
 while len(heap) != 1:
     one = heapq.heappop(heap)
     two = heapq.heappop(heap)
+    answer += one + two
+    heapq.heappush(heap, one + two)
 
-    sum_value = one + two
-    result += sum_value
-    heapq.heappush(heap, sum_value)
-
-print(result)
+print(answer)
