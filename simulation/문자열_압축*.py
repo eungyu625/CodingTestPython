@@ -1,8 +1,6 @@
 
-
 def solution(s):
-    n = len(s)
-    answer = n
+    answer = len(s)
 
     for step in range(1, len(s) // 2 + 1):
         compressed = ""
@@ -17,7 +15,7 @@ def solution(s):
                 count = 1
 
         compressed += str(count) + prev if count >= 2 else prev
-        answer = min(answer, len(compressed))
+        answer = min(len(compressed), answer)
 
     return answer
 
