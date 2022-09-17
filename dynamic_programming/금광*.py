@@ -1,11 +1,11 @@
 for tc in range(int(input())):
     n, m = map(int, input().split())
-    array = list(map(int, input().split()))
-
+    arr = list(map(int, input().split()))
     dp = []
+
     index = 0
     for i in range(n):
-        dp.append(array[index:index + m])
+        dp.append(arr[index:index + m])
         index += m
 
     for j in range(1, m):
@@ -19,8 +19,6 @@ for tc in range(int(input())):
             else:
                 left_down = dp[i + 1][j - 1]
             left = dp[i][j - 1]
-            dp[i][j] = dp[i][j] + max(left_up, left_down, left)
-    result = 0
-    for i in range(n):
-        result = max(result, dp[i][m - 1])
-    print(result)
+            dp[i][j] += max(left_up, left_down, left)
+
+    print(max(dp[i][m - 1] for i in range(n)))
