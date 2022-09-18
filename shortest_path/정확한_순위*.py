@@ -11,15 +11,19 @@ for i in range(1, n + 1):
 for _ in range(m):
     a, b = map(int, input().split())
     graph[a][b] = 1
-    graph[b][a] = 1
 
-x, k = map(int, input().split())
-
-for h in range(1, n + 1):
+for k in range(1, n + 1):
     for i in range(1, n + 1):
         for j in range(1, n + 1):
-            graph[i][j] = min(graph[i][j], graph[i][h] + graph[h][j])
+            graph[i][j] = min(graph[i][j], graph[i][k] + graph[k][j])
 
-distance = graph[1][k] + graph[k][x]
+result = 0
+for i in range(1, n + 1):
+    count = 0
+    for j in range(1, n + 1):
+        if graph[i][j] != INF or graph[j][i] != INF:
+            count += 1
+    if count == n:
+        result += 1
 
-print(distance if distance < INF else -1)
+print(result)
