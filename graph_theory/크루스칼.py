@@ -5,8 +5,8 @@ def find_parent(x):
 
 
 def union_parent(num1, num2):
-    child_a = find_parent(num1)
-    child_b = find_parent(num2)
+    child_a = parent[num1]
+    child_b = parent[num2]
     if child_a < child_b:
         parent[child_b] = child_a
     else:
@@ -24,7 +24,7 @@ for i in range(1, v + 1):
 
 for _ in range(e):
     a, b, cost = map(int, input().split())
-    edges.append((cost, a, b))
+    edges.append([cost, a, b])
 
 edges.sort()
 

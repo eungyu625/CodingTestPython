@@ -19,12 +19,10 @@ def topology_sort():
     while q:
         now = q.pop(0)
         result.append(now)
-
         for i in graph[now]:
             indegree[i] -= 1
             if indegree[i] == 0:
                 q.append(i)
-
     for i in result:
         print(i, end=' ')
 
