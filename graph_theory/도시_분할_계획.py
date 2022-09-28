@@ -1,12 +1,12 @@
 def find_parent(x):
     if parent[x] != x:
-        parent[x] = find_parent(x)
+        parent[x] = find_parent(parent[x])
     return parent[x]
 
 
-def union_parent(num1, num2):
-    child_a = find_parent(num1)
-    child_b = find_parent(num2)
+def union_parent(x1, x2):
+    child_a = find_parent(x1)
+    child_b = find_parent(x2)
     if child_a < child_b:
         parent[child_b] = child_a
     else:
@@ -19,12 +19,12 @@ parent = [0] * (n + 1)
 edges = []
 result = 0
 
-for i in range(n + 1):
+for i in range(1, n + 1):
     parent[i] = i
 
 for _ in range(m):
-    a, b, cost = map(int, input().split())
-    edges.append([cost, a, b])
+    a, b, c = map(int, input().split())
+    edges.append((c, a, b))
 
 edges.sort()
 last = 0

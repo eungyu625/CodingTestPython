@@ -1,6 +1,6 @@
 def find_parent(x):
     if parent[x] != x:
-        parent[x] = find_parent(parent[x])
+        parent[x] = find_parent(parent(x))
     return parent[x]
 
 
@@ -23,4 +23,13 @@ for i in range(e):
     a, b = map(int, input().split())
     union_parent(a, b)
 
+print('각 원소가 속한 집합 : ', end='')
+for i in range(1, v + 1):
+    print(find_parent(i), end=' ')
+
+print()
+
+print('부모 테이블 : ', end='')
+for i in range(1, v + 1):
+    print(parent[i], end=' ')
 
