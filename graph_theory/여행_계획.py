@@ -13,10 +13,11 @@ def union_parent(x1, x2):
         parent[child_x1] = child_x2
 
 
-def check(travel):
-    road = travel[0]
-    for t in travel:
-        if parent[road] != parent[t]:
+def check():
+    std = plans[0]
+
+    for plan in plans:
+        if find_parent(plan) != find_parent(std):
             return False
     return True
 
@@ -27,23 +28,15 @@ parent = [0] * (n + 1)
 for i in range(1, n + 1):
     parent[i] = i
 
-edges = []
-
 for i in range(n):
     data = list(map(int, input().split()))
     for j in range(len(data)):
         if data[j] == 1:
-            edges.append((i + 1, j + 1))
+            union_parent(i + 1, j + 1)
 
-trip = list(map(int, input().split()))
-edges.sort()
+plans = list(map(int, input().split()))
 
-for edge in edges:
-    a, b = edge
-    if find_parent(a) != find_parent(b):
-        union_parent(a, b)
-
-if check(trip):
+if check():
     print("YES")
 else:
     print("NO")
