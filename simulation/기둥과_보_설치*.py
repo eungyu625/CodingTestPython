@@ -1,28 +1,27 @@
-def check(answer):
-    for x, y, stuff in answer:
+def check(result):
+    for x, y, stuff in result:
         if stuff == 0:
-            if y == 0 or [x - 1, y, 1] in answer or [x, y, 1] in answer or [x, y - 1, 0] in answer:
+            if y == 0 or [x, y, 1] in result or [x - 1, y, 1] in result or [x, y - 1, 0] in result:
                 continue
             return False
         else:
-            if [x, y - 1, 0] in answer or [x + 1, y - 1, 0] in answer\
-                    or ([x - 1, y, 1] in answer and [x + 1, y, 1 in answer]):
+            if [x, y - 1, 0] in result or [x + 1, y - 1, 0] in result or\
+                    ([x - 1, y, 1] in result and [x + 1, y, 1] in result):
                 continue
             return False
     return True
 
 
 def solution(n, build_frame):
-    answer = []
-
-    for x, y, stuff, operate in build_frame:
-        if operate == 0:
-            answer.remove([x, y, stuff])
-            if not check(answer):
-                answer.append([x, y, stuff])
+    result = []
+    for x, y, stuff, op in build_frame:
+        if op == 0:
+            result.remove([x, y, stuff])
+            if not check(result):
+                result.append([x, y, stuff])
         else:
-            answer.append([x, y, stuff])
-            if not check(answer):
-                answer.remove([x, y, stuff])
+            result.append([x, y, stuff])
+            if not check(result):
+                result.remove([x, y, stuff])
 
-    return sorted(answer)
+    return sorted(result, key=lambda l: (l[0], l[1]))

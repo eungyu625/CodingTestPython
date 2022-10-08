@@ -1,4 +1,3 @@
-
 def solution(s):
     answer = len(s)
 
@@ -12,12 +11,9 @@ def solution(s):
                 count += 1
             else:
                 compressed += str(count) + prev if count >= 2 else prev
+                prev = s[j:j + step]
                 count = 1
 
         compressed += str(count) + prev if count >= 2 else prev
-        answer = min(len(compressed), answer)
-
+        answer = min(answer, len(compressed))
     return answer
-
-
-print(solution(input()))

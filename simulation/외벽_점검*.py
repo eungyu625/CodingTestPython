@@ -2,7 +2,7 @@ from itertools import permutations
 
 
 def solution(n, weak, dist):
-    result = len(dist) + 1
+    answer = len(dist) + 1
     length = len(weak)
 
     for i in range(length):
@@ -18,9 +18,9 @@ def solution(n, weak, dist):
                     if count > len(dist):
                         break
                     position = weak[index] + friends[count - 1]
-            result = min(result, count)
+            answer = min(answer, count)
 
-    if result > len(dist):
+    if answer > len(dist):
         return -1
 
-    return result
+    return answer

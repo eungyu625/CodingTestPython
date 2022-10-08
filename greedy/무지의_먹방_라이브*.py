@@ -14,7 +14,7 @@ def solution(food_times, k):
     length = len(food_times)
 
     while sum_value + ((q[0][0] - previous) * length) <= k:
-        now = heapq.heappop(q)[0]
+        now = heapq.heappop()[0]
         sum_value += (now - previous) * length
         previous = now
         length -= 1
